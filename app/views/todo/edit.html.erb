@@ -1,0 +1,12 @@
+<% # still facing some issue here. Check it out %>
+<h1>Edit Todo Detail</h1>
+
+<%= form_for @todo, :url => { :action => "update", :id => @todo } do |f| %>
+
+<p>Content: <%= f.text_field "todo_text" %></p>
+<p>Due Date: <%= f.date_field "due_date" %></p>
+
+<%= f.submit "Save changes" %>
+<% end %>
+
+<%= link_to "Back", { :action => "list" } %>

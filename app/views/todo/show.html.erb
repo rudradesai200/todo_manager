@@ -1,0 +1,17 @@
+<hr>
+<p>
+<strong><%= @todo.id %></strong>
+<strong>Content: </strong> <%= @todo.todo_text %>
+<strong>Due Date: </strong> <%= @todo.due_date.to_s %>
+<strong>Completed: </strong> <%= @todo.completed? %>
+</p>
+<hr>
+
+<%= link_to "Back", { :action => "list" } %>
+<%= link_to "Edit", todo_edit_path(id: @todo.id) %>
+<% if @todo.completed %>
+<%= link_to "Undone", todo_mark_not_complete_path(id: @todo.id) %>
+<% else %>
+<%= link_to "Done", todo_mark_complete_path(id: @todo.id) %>
+<% end %>
+<%= link_to "Delete", todo_delete_path(id: @todo.id) %>

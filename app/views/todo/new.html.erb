@@ -1,0 +1,12 @@
+<h1> Add a new Todo </h1>
+
+<%= form_with url: "/todo/create", method: :post do |form| %>
+  <%= form.label :todo_text, "Content" %>
+  <%= form.text_field :todo_text %>
+
+  <%= form.label :due_date, "date" %>
+  <%= form.date_field :due_date %>
+
+  <%= form.submit "Create" %>
+<% end %>
+<%= link_to "Back", { :action => "list" } %>

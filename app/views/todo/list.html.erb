@@ -1,0 +1,13 @@
+<% if @todos.blank? %>
+<p> There are no Todos. Enjoy!!</p>
+<% else %>
+<p> My Todos </p>
+
+<ul id="todos">
+  <% @todos.each do |t| %>
+  <li><%= link_to t.to_displayable_string, { :action => "show", :id => t.id } %></li>
+  <% end %>
+</ul>
+
+<% end %>
+<p><%= link_to "Add new Todo", { :action => "new" } %></p>
