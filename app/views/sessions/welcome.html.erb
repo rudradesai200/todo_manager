@@ -2,10 +2,11 @@
 
 <% if logged_in? %>
   <h2>You are Logged In, <%= current_user.username %></h2>
-
+  <%= button_to "Logout", "/logout", method: :get %>
+  <%= button_to "Todos", "/todo/list", method: :get %>
 <% else %>
 
-<%= button_to "Login", "/sessions/login", method: :get %>
+<%= button_to "Login", "/login", method: :get %>
 <%= button_to "Sign Up", "/users/new", method: :get %>
 
 <% end %>

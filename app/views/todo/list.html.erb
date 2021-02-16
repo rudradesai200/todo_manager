@@ -10,4 +10,5 @@
 </ul>
 
 <% end %>
-<p><%= link_to "Add new Todo", { :action => "new" } %></p>
+<%= button_to "Add new Todo", { :action => "new" }, method: :get %>
+<%= button_to "Home", "/welcome", method: :get %>

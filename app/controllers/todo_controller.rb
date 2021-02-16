@@ -1,10 +1,12 @@
 class TodoController < ApplicationController
+  skip_before_action :authorized, only: [:list, :show, :new, :create, :edit, :update, :delete, :mark_complete ,:mark_not_complete]
+
   def list
-    @todos = Todo.all
+    @todos = current_user.todos
   end
 
   def show
-    @todo = Todo.find(params[:id])
+    @todo = current_user.todos.find(params[:id])
   end
 
   def new
@@ -14,20 +16,21 @@ class TodoController < ApplicationController
   def create
     @todo = Todo.new(todo_params)
     @todo.completed = false
+    @todo.user = current_user
     if @todo.save
       redirect_to :action => 'list'
     else
-      @todos = Todo.all
+      @todos = current_user.todos.all
       render :action => 'new'
     end
   end
 
   def edit
-    @todo = Todo.find(params[:id])
+    @todo = current_user.todos.find(params[:id])
   end
 
   def update
-    todo = Todo.find(params[:id])
+    todo = current_user.todos.find(params[:id])
     if todo.update(todo_update_params)
       redirect_to :action => 'show', :id => todo
     else
@@ -36,7 +39,7 @@ class TodoController < ApplicationController
   end
 
   def delete
-    Todo.find(params[:id]).destroy
+    current_user.todos.find(params[:id]).destroy
     redirect_to :action => 'list'
   end
 
@@ -49,7 +52,7 @@ class TodoController < ApplicationController
   end
 
   def mark_complete
-    @todo = Todo.find(params[:id])
+    @todo = current_user.todos.find(params[:id])
     @todo.completed = true
     if @todo.save
       redirect_to :action => 'show', :id => @todo
@@ -59,7 +62,7 @@ class TodoController < ApplicationController
   end
 
   def mark_not_complete
-    @todo = Todo.find(params[:id])
+    @todo = current_user.todos.find(params[:id])
     @todo.completed = false
     if @todo.save
       redirect_to :action => 'show', :id => @todo

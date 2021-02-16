@@ -1,5 +1,7 @@
 class Todo < ApplicationRecord
 
+  belongs_to :user
+
   def overdue? ; (Date.today > due_date) end
 
   def due_today? ; (Date.today == due_date) end
